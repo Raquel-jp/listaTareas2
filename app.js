@@ -22,10 +22,13 @@ function agregarTarea(){
        //Iconos:(iconos de boostrap)
        let completar = document.createElement('i');
        completar.classList.add('bi', 'bi-check-circle-fill', 'icono-completar');
-
+       completar.addEventListener('click', completarTarea);
+       
        let eliminar = document.createElement('i');
        eliminar.classList.add('bi', 'bi-trash3-fill', 'icono-eliminar');
-    
+       eliminar.addEventListener('click', eliminarTarea);
+       
+       
        iconos.append(completar, eliminar);
 
        //Agreagar tarea a la lista:
@@ -36,4 +39,22 @@ function agregarTarea(){
     }
 }
 
+
+function completarTarea(e){
+    let tarea = e.target.parentNode.parentNode;
+tarea.classList.toggle('completada');
+}
+function eliminarTarea(e){
+    let tarea = e.target.parentNode.parentNode;
+    tarea.remove();
+}
+
 boton.addEventListener('click', agregarTarea);
+
+
+//para que el botom enter pueda agregar tareas tambien:
+input.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter'){
+     agregarTarea();
+    }
+});
